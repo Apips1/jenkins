@@ -3,20 +3,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Hello Build'
-                sleep(10)
+                echo ('Building the project...')
+                bat ("./mvnw clean compile test-compile")
+                echo ('Build completed successfully.')
             }
         }
         stage('Test') {
             steps {
-                echo 'Hello Test'
-                sleep(10)
+                echo ('Testing the project...')
+                bat ("./mvnw test")
+                echo ('Test completed successfully.')
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Hello Deploy'
-                sleep(10)
+                echo ('Deploying the project...')
+                bat ("./mvnw deploy")
+                echo ('Deployment completed successfully.')
             }
         }
     }
