@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "windows" }
+    agent { label "linux && java17" }
     stages {
         stage('Hello') {
             steps {
