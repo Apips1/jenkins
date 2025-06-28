@@ -15,13 +15,7 @@ pipeline {
                 echo ('Test completed successfully.')
             }
         }
-        stage('Deploy') {
-            steps {
-                echo ('Deploying the project...')
-                bat ("./mvnw deploy")
-                echo ('Deployment completed successfully.')
-            }
-        }
+      
     }
     post {
         always {
