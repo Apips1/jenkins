@@ -1,9 +1,19 @@
 pipeline {
     agent { label "linux && java17" }
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                echo 'Hello Build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Hello Test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Hello Deploy'
             }
         }
     }
@@ -19,6 +29,6 @@ pipeline {
         }
         cleanup {
             echo 'This will run at the end of the pipeline, regardless of success or failure'
-        }
+        }git add 
     }
 }
