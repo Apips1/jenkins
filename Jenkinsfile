@@ -29,6 +29,6 @@ pipeline {
         }
         cleanup {
             echo 'This will run at the end of the pipeline, regardless of success or failure'
-        }git add 
+        }
     }
 }
