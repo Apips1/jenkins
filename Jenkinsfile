@@ -8,6 +8,9 @@ pipeline {
 
     stages {
         stage('Prepare') {
+            environment {
+                APP = credentials('afif_rahasia')
+            }
             agent { label "linux && java17" }
             steps {
                 echo "Author : ${env.AUTHOR}"
@@ -15,6 +18,8 @@ pipeline {
                 echo "Start Job : ${env.JOB_NAME}"
                 echo "Build Number : ${env.BUILD_NUMBER}"
                 echo "Branch Name : ${env.BRANCH_NAME}"
+                echo "App User: ${env.APP_USR}"
+                echo "App Password: ${env.APP_PSW}"
             }
         }
         stage('Build') {
