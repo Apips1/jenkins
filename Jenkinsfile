@@ -6,6 +6,10 @@ pipeline {
       WEBSITE = 'https://afifnugroho.com'
     }
 
+    triggers {
+        cron("*/5 * * * *") // Runs every 5 minutes
+    }
+
     options {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
