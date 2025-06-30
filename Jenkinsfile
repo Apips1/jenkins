@@ -165,4 +165,3 @@ pipeline {
             echo 'This will run at the end of the pipeline, regardless of success or failure'
         }
     }
-}
