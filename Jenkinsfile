@@ -4,11 +4,13 @@ pipeline {
       AUTHOR = 'Afif Nugroho'
       EMAIL = 'lMh4f@example.com'
       WEBSITE = 'https://afifnugroho.com'
-    }
+    } 
 
-    triggers {
-        cron("*/5 * * * *") // Runs every 5 minutes
-    }
+    // triggers {
+    //     cron("*/5 * * * *") // Runs every 5 minutes
+    // //     pollSCM('*/5 * * * *') // Polls SCM every 15 minutes
+    // //     upstream(upstreamProjects: "job1,job2", threshold: hudson.model.Result.SUCCESS) // Triggered by an upstream job
+    // // }
 
     options {
         disableConcurrentBuilds()
@@ -77,6 +79,20 @@ pipeline {
                 bat "./mvnw test"
                 echo 'Test completed successfully.'
             }
+        }
+    }
+    stage('Deploy') {
+        input {
+            message "Do you want to deploy the project?"
+            ok "Yes, deploy it!"
+            submitter "Apips"
+        }
+        agent { label "linux && java17" }
+        steps {
+            echo('Deploying the project...')
+            sleep(5)
+            echo('Deployment completed successfully.')
+
         }
     }
     post {
