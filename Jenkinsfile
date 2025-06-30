@@ -3,6 +3,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                script{ 
+                for (int i = 0; i < 10; i++) {
+                    echo "Script ${i + 1}"
+                }
+            }
                 echo ('Building the project...')
                 bat ("./mvnw clean compile test-compile")
                 echo ('Build completed successfully.')
@@ -10,10 +15,13 @@ pipeline {
         }
         stage('Test') {
         steps {
-            script{ 
-                for (int i = 0; i < 10; i++) {
-                    echo "Script ${i + 1}"
-                }
+
+            script {
+                def data = [
+                    "FirstName": "Afif",
+                    "LastName" : "Nugroho"
+                ]
+                writeJSON(file: 'data.json', json: data)
             }
                 echo ('Testing the project...')
                 bat ("./mvnw test")
