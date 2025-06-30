@@ -6,12 +6,6 @@ pipeline {
         WEBSITE = 'https://afifnugroho.com'
     }
 
-    // triggers {
-    //     cron("*/5 * * * *") // Runs every 5 minutes
-    //     pollSCM('*/5 * * * *') // Polls SCM every 15 minutes
-    //     upstream(upstreamProjects: "job1,job2", threshold: hudson.model.Result.SUCCESS) // Triggered by an upstream job
-    // }
-
     options {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
@@ -92,21 +86,17 @@ pipeline {
             agent { label "linux && java17" }
             steps {
                 echo "Deploying to ${params.TARGET_ENV}"
-                
             }
         }
-         stage('Release') {
-            when{
-                expression { return params.DEPLOY}
+        stage('Release') {
+            when {
+                expression { return params.DEPLOY }
             }
-           
             agent { label "linux && java17" }
             steps {
                 echo 'Releasing the project...'
-                
             }
         }
-    }
     }
 
     post {
