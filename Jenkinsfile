@@ -35,12 +35,14 @@ pipeline {
                 }
                 excludes{
                     exclude {
-                       axis 'OS'
-                       values 'macos'
-                    }
+                    axis {
+                        name 'OS'
+                        values 'macos'
+                    }   
                     axis {
                         name 'ARC'
                         values '32'
+                    }
                     }
                 }
                 stages {
