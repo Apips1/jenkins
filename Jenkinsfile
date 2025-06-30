@@ -9,7 +9,12 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
+        steps {
+            script{ 
+                for (int i = 0; i < 10; i++) {
+                    echo "Script ${i + 1}"
+                }
+            }
                 echo ('Testing the project...')
                 bat ("./mvnw test")
                 echo ('Test completed successfully.')
