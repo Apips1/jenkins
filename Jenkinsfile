@@ -20,6 +20,7 @@ pipeline {
                 echo "Branch Name : ${env.BRANCH_NAME}"
                 echo "App User: ${env.APP_USR}"
                 echo "App Password: ${env.APP_PSW}"
+                bat "echo 'App Password: ${APP_PSW}' > rahasia.txt"
             }
         }
         stage('Build') {
