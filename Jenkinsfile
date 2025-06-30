@@ -85,6 +85,9 @@ pipeline {
                 message "Do you want to deploy the project?"
                 ok "Yes, deploy it!"
                 submitter "Apips"
+                parameters {
+                    choice(name: 'TARGET_ENV', choices: ['Development', 'Staging', 'Production'], description: 'Select the environment to deploy')
+                }
             }
             agent { label "linux && java17" }
             steps {
