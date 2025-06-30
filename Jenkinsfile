@@ -92,7 +92,7 @@ pipeline {
                 echo "Branch Name : ${env.BRANCH_NAME}"
                 echo "App User: ${env.APP_USR}"
                 echo "App Password: ${env.APP_PSW}"
-                sh 'echo "App Password: $APP_PSW" > rahasia.txt'
+                bat 'echo "App Password: $APP_PSW" > rahasia.txt'
             }
         }
 
@@ -105,7 +105,7 @@ pipeline {
                     }
                 }
                 echo 'Building the project...'
-                sh './mvnw clean compile test-compile'
+                bat './mvnw clean compile test-compile'
                 echo 'Build completed successfully.'
             }
         }
@@ -121,7 +121,7 @@ pipeline {
                     writeJSON(file: 'data.json', json: data)
                 }
                 echo 'Testing the project...'
-                sh './mvnw test'
+                bat './mvnw test'
                 echo 'Test completed successfully.'
             }
         }
