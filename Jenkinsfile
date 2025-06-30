@@ -12,7 +12,6 @@ pipeline {
             steps {
                 echo "Author : ${env.AUTHOR}"
                 echo "Email : ${env.EMAIL}"
-                echo
                 echo "Start Job : ${env.JOB_NAME}"
                 echo "Build Number : ${env.BUILD_NUMBER}"
                 echo "Branch Name : ${env.BRANCH_NAME}"
