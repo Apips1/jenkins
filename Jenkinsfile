@@ -1,5 +1,6 @@
 pipeline {
     agent none
+
     environment {
         AUTHOR = 'Afif Nugroho'
         EMAIL = 'lMh4f@example.com'
@@ -20,6 +21,22 @@ pipeline {
     }
 
     stages {
+        stage('Preparation') {
+            agent { label "linux && java17" }
+            stages {
+                stage("Prepare Java") {
+                    steps {
+                        echo "Preparing Java environment..."
+                    }
+                }
+                stage("Prepare Maven") {
+                    steps {
+                        echo "Preparing Maven environment..."
+                    }
+                }
+            }
+        }
+
         stage('Parameter') {
             agent { label "linux && java17" }
             steps {
@@ -30,6 +47,7 @@ pipeline {
                 echo "Secret: ${params.SECRET}"
             }
         }
+
         stage('Prepare') {
             environment {
                 APP = credentials('afif_rahasia')
@@ -46,6 +64,7 @@ pipeline {
                 bat 'echo "App Password: %APP_PSW%" > "rahasia.txt"'
             }
         }
+
         stage('Build') {
             agent { label "linux && java17" }
             steps {
