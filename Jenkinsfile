@@ -91,11 +91,22 @@ pipeline {
             }
             agent { label "linux && java17" }
             steps {
-                echo('Deploying the project...')
-                sleep(5)
-                echo('Deployment completed successfully.')
+                echo "Deploying to ${params.TARGET_ENV}"
+                
             }
         }
+         stage('Release') {
+            when{
+                expression { return params.DEPLOY}
+            }
+           
+            agent { label "linux && java17" }
+            steps {
+                echo 'Releasing the project...'
+                
+            }
+        }
+    }
     }
 
     post {
