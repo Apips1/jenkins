@@ -22,15 +22,17 @@ pipeline {
 
     stages {
         stage('Preparation') {
-            agent { label "linux && java17" }
-            stages {
+          
+            parallel {
                 stage("Prepare Java") {
+                      agent { label "linux && java17" }
                     steps {
                         echo "Preparing Java environment..."
                         sleep(5)
                     }
                 }
                 stage("Prepare Maven") {
+                      agent { label "linux && java17" }
                     steps {
                         echo "Preparing Maven environment..."
                         sleep(5)
