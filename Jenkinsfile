@@ -33,7 +33,6 @@ pipeline {
       
     }
     post {
-         agent { label "linux && java17" }
         always {
             echo 'This will always run'
         }
