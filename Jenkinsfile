@@ -1,7 +1,8 @@
 pipeline {
-    agent { label "linux && java17" }
+   agent none
     stages {
         stage('Build') {
+             agent { label "linux && java17" }
             steps {
                 script{ 
                 for (int i = 0; i < 10; i++) {
@@ -14,6 +15,7 @@ pipeline {
             }
         }
         stage('Test') {
+             agent { label "linux && java17" }
         steps {
 
             script {
@@ -31,6 +33,7 @@ pipeline {
       
     }
     post {
+         agent { label "linux && java17" }
         always {
             echo 'This will always run'
         }
