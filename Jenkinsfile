@@ -1,6 +1,6 @@
 pipeline {
     agent none
-    enviroment {
+    environment {
       AUTHOR = 'Afif Nugroho'
       EMAIL = 'lMh4f@example.com'
       WEBSITE = 'https://afifnugroho.com'
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Author : ${env.AUTHOR}"
                 echo "Email : ${env.EMAIL}"
-                echo "Website : ${env.WEBSITE}"
+                echo
                 echo "Start Job : ${env.JOB_NAME}"
                 echo "Build Number : ${env.BUILD_NUMBER}"
                 echo "Branch Name : ${env.BRANCH_NAME}"
