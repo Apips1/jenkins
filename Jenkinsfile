@@ -21,10 +21,9 @@ pipeline {
     }
 
     stages {
-
-        stage("OS Setup"){
-            matrix{
-                axes{
+        stage("OS Setup") {
+            matrix {
+                axes {
                     axis {
                         name 'OS'
                         values 'linux', 'windows', 'macos'
@@ -34,34 +33,33 @@ pipeline {
                         values '32', '64'
                     }
                 }
-                   stages{
-                stage("OS Setup"){
-                    agent {
-                        node {
-                            label "linux && java17"
+                stages {
+                    stage("OS Setup") {
+                        agent {
+                            node {
+                                label "linux && java17"
+                            }
+                        }
+                        steps {
+                            echo "Running setup for OS=${OS}, ARC=${ARC}"
                         }
                     }
-                    steps {
-                        echo "Setup ${OS} ${ARC}"   
-                    }
                 }
-            }
-            }
+
             }
         }
 
         stage('Preparation') {
-          
             parallel {
                 stage("Prepare Java") {
-                      agent { label "linux && java17" }
+                    agent { label "linux && java17" }
                     steps {
                         echo "Preparing Java environment..."
                         sleep(5)
                     }
                 }
                 stage("Prepare Maven") {
-                      agent { label "linux && java17" }
+                    agent { label "linux && java17" }
                     steps {
                         echo "Preparing Maven environment..."
                         sleep(5)
@@ -94,7 +92,7 @@ pipeline {
                 echo "Branch Name : ${env.BRANCH_NAME}"
                 echo "App User: ${env.APP_USR}"
                 echo "App Password: ${env.APP_PSW}"
-                bat 'echo "App Password: %APP_PSW%" > "rahasia.txt"'
+                sh 'echo "App Password: $APP_PSW" > rahasia.txt'
             }
         }
 
@@ -107,10 +105,11 @@ pipeline {
                     }
                 }
                 echo 'Building the project...'
-                bat "./mvnw clean compile test-compile"
+                sh './mvnw clean compile test-compile'
                 echo 'Build completed successfully.'
             }
         }
+
         stage('Test') {
             agent { label "linux && java17" }
             steps {
@@ -122,10 +121,11 @@ pipeline {
                     writeJSON(file: 'data.json', json: data)
                 }
                 echo 'Testing the project...'
-                bat "./mvnw test"
+                sh './mvnw test'
                 echo 'Test completed successfully.'
             }
         }
+
         stage('Deploy') {
             input {
                 message "Do you want to deploy the project?"
@@ -140,6 +140,7 @@ pipeline {
                 echo "Deploying to ${params.TARGET_ENV}"
             }
         }
+
         stage('Release') {
             when {
                 expression { return params.DEPLOY }
@@ -165,3 +166,4 @@ pipeline {
             echo 'This will run at the end of the pipeline, regardless of success or failure'
         }
     }
+}
