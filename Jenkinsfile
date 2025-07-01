@@ -159,7 +159,13 @@ pipeline {
             }
             agent { label "linux && java17" }
             steps {
-                echo 'Releasing the project...'
+             withCredetials([usernamePassword(
+                credentialsId: 'afif_rahasia',
+                usernameVariable: 'USER',
+                passwordVariable: 'PASSWORD'
+             )]){
+                bat ('echo "Release it with -u ${USER} -p ${PASSWORD}" > "release.txt"')
+             }
             }
         }
     }
