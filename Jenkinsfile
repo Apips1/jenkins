@@ -159,7 +159,7 @@ pipeline {
             }
             agent { label "linux && java17" }
             steps {
-             withCredetials([usernamePassword(
+             withCredentials([usernamePassword(
                 credentialsId: 'afif_rahasia',
                 usernameVariable: 'USER',
                 passwordVariable: 'PASSWORD'
